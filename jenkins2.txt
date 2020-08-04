@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+            stages {
+                    stage('One') {
+                            steps {
+                                    echo 'This is our first Jenkins pipeline'
+                            }
+                    }
+                
+                    stage('Two') {
+                            steps {
+                                    input('DEV?')
+                            }
+                    }
+                    stage('Three') {
+                        when {
+                            not {
+                                  branch "master"
+                            }
+                        }
+                        steps {
+                                input('QA?')
+                        }
+                    }
+					  stage('Four') {
+                        when {
+                            not {
+                                  branch "master"
+                            }
+                        }
+                        steps {
+                                input('Prod?')
+                        }
+                    }
+					 stage('Five') {
+                        when {
+                            not {
+                                  branch "master"
+                            }
+                        }
+                        steps {
+                                echo "Done"
+                        }
+                    }
+                 }
+            }
